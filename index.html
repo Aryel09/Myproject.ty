@@ -1,76 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Chat with GPT</title>
-<style>
-    #chat-container {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    #chat-messages {
-        height: 300px;
-        overflow-y: scroll;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-    #user-input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+  <title> Empty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    
+
+#list {
+
+border: 2px solid black;
+padding: 10px;
+width: 50%;
 margin: 0 auto;
-    }
-</style>
+/*display: inline;*/
+
+}
+  </style>
 </head>
 <body>
-<div id="chat-container">
-    <div id="chat-messages"></div>
-    <input type="text" id="user-input" placeholder="Type your message...">
-</div>
-    <h1>Hello</h1>
+
+<h2>Switch</h2>
+
+<p id="days">hello   </p>
+
+
+<h2>if else</h2>
+
+<p id="part"> </p>
+
+<h2> While</h2>
+<div id="list"></div>
+<p id="list1"></p>
+
+<input id="wlist" column="30" />
+<br>
+<br>
+<button type="button" onclick="wpush()">add</button>
+<button type="button" onclick="wpop()">remove</button>
+
+
 
 <script>
-    const chatMessages = document.getElementById('chat-messages');
-    const userInput = document.getElementById('user-input');
 
-    userInput.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            sendMessage();
-        }
-    });
+let print = ["apple","orange","grapes","guava","lemon"];
 
-    function sendMessage() {
-        const userMessage = userInput.value.trim();
-        if (userMessage !== '') {
-            appendMessage('You: ' + userMessage);
-            userInput.value = '';
-            getResponse(userMessage);
-        }
-    }
 
-    function appendMessage(message) {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = message;
-        chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
 
-    function getResponse(message) {
-        // You can send the user's message to the server to get a response from GPT.
-        // For simplicity, I'll just simulate a response here.
-        const response = 'GPT: Thank you for your message!';
-        setTimeout(() => {
-            appendMessage(response);
-        }, 500); // Simulating response delay
-    }
+let date = new Date();
+let day = date.getDay();
+let dayname = "";
+
+
+
+switch (day){
+
+case 0:
+
+dayname = "Sunday";
+break;
+case 1:
+
+dayname = "Monday";
+break;
+case 2:
+
+dayname = "Tuesday";
+break;
+case 3:
+
+dayname = "Wednesday";
+break;
+case 4:
+
+dayname = "Thursday";
+break;
+
+case 5:
+
+dayname = "Friday";
+break;
+
+case 6:
+
+dayname = "Saturday";
+
+
+}
+
+let months =["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+document.getElementById("days").innerHTML ="The date today is "+dayname +" "+date.getDate()+" "+ months[date.getMonth()];
+
+let partof = "";
+
+
+if(date.getHours() < 12) {
+
+partof = "Good Morning";
+
+} else if(date.getHours() < 18) {
+
+partof = "Good Afternoon";
+
+} else {
+
+partof = "Good evening";
+}
+
+document.getElementById("part").innerHTML = partof +" the time is "+date.getHours()+":"+date.getMinutes();
+
+let arr = ["apple","orange"];
+
+function renderList() {
+  let lix = "";
+  let wi = 0;
+  while (arr[wi]) {
+    lix += arr[wi] + "<br>";
+    wi++;
+  }
+  document.getElementById("list").innerHTML = lix;
+}
+
+renderList(); // initial display
+
+function wpush() {
+  let put = document.getElementById("wlist").value;
+  if (put.trim() !== "") {
+    arr.push(put.trim());
+    renderList(); // update list
+    document.getElementById("wlist").value = ""; // clear input
+  }
+}
+function wpop() {
+
+arr.pop();
+renderList();
+document.getElementById("wlist").value = ""; 
+
+}
+
+
+
+
+
 </script>
+
 </body>
 </html>
